@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-
 const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 
 const Car = new Schema(
   {
@@ -9,7 +9,8 @@ const Car = new Schema(
     price: { type: Number, required: true },
     year: { type: Number, max: 2040, min: 1800 },
     imgUrls: [{ type: String }],
-    description: { type: String, maxlength: 250 }
+    description: { type: String, maxlength: 250 },
+    creator: { type: ObjectId, ref: "User", required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

@@ -1,15 +1,10 @@
 import mongoose from "mongoose";
-import Car from "../models/Car";
 import ApiError from "../utils/ApiError";
 import User from "../models/User";
-import usersService from "./UsersService";
 
-const _repository = mongoose.model("Car", Car);
+const _repository = mongoose.model("User", User);
 
-class CarService {
-  async getAll() {
-    return await _repository.find({}).populate("creator");
-  }
+class UsersService {
   async getById(id) {
     let data = await _repository.findById(id);
     if (!data) {
@@ -18,9 +13,15 @@ class CarService {
     return data;
   }
 
-  async create(username, rawData) {
-    let user = await usersService.getByName(username);
-    rawData.creator = user._id;
+  async getByName(searchName) {
+    let data = await _repository.findOne({ name: searchName });
+    if (!data) {
+      throw new ApiError("Invalid Name", 400);
+    }
+    return data;
+  }
+
+  async create(rawData) {
     let data = await _repository.create(rawData);
     return data;
   }
@@ -43,5 +44,5 @@ class CarService {
   }
 }
 
-const carService = new CarService();
-export default carService;
+const usersService = new UsersService();
+export default usersService;
