@@ -2,48 +2,28 @@
   <div class="home container-fluid">
     <header class="row">
       <div class="col">
-        <h1>C<img alt="Vue logo" src="../assets/logo.png" />rs</h1>
+        <h1>
+          C
+          <img alt="Vue logo" src="../assets/logo.png" />rs
+        </h1>
       </div>
     </header>
     <main class="row search">
       <div class="col-12">
         <form @submit.prevent="createCar">
-          <input
-            required
-            type="text"
-            v-model="newCar.make"
-            placeholder="Make"
-          />
-          <input
-            required
-            type="text"
-            v-model="newCar.model"
-            placeholder="model"
-          />
-          <input
-            required
-            type="number"
-            v-model="newCar.price"
-            placeholder="price"
-          />
+          <input required type="text" v-model="newCar.make" placeholder="Make" />
+          <input required type="text" v-model="newCar.model" placeholder="model" />
+          <input required type="number" v-model="newCar.price" placeholder="price" />
           <input
             required
             type="number"
             v-model="newCar.year"
             placeholder="year"
+            min="1800"
+            max="2040"
           />
-          <input
-            required
-            type="text"
-            v-model="newCar.imgUrl"
-            placeholder="imgUrl"
-          />
-          <input
-            required
-            type="text"
-            v-model="newCar.description"
-            placeholder="description"
-          />
+          <input required type="text" v-model="newCar.imgUrl" placeholder="imgUrl" />
+          <input required type="text" v-model="newCar.description" placeholder="description" />
           <button class="btn btn-success" type="submit">Add Car</button>
         </form>
       </div>
