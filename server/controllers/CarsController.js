@@ -5,10 +5,9 @@ export default class CarController {
   constructor() {
     this.router = express
       .Router({ mergeParams: true }) //Allows to get parameters from main
-      //NOTE  each route gets registered as a .get, .post, .put, or .delete, the first parameter of each method is a string to be concatinated onto the base url registered with the route in main. The second parameter is the method that will be run when this route is hit.
-      .get("", this.getAll) //api/:username/cars
+      .get("", this.getAll) //api/cars
       .get("/:id", this.getById)
-      .post("", this.create) //api/:username/cars
+      .post("", this.create) //api/cars
       .put("/:id", this.edit)
       .delete("/:id", this.delete);
   }
@@ -33,7 +32,7 @@ export default class CarController {
 
   async create(req, res, next) {
     try {
-      let data = await carService.create(req.params.username, req.body);
+      let data = await carService.create(req.body);
       return res.status(201).send(data);
     } catch (error) {
       next(error);

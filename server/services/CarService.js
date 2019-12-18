@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import Car from "../models/Car";
 import ApiError from "../utils/ApiError";
-import User from "../models/User";
-import usersService from "./UsersService";
 
 const _repository = mongoose.model("Car", Car);
 
@@ -18,9 +16,7 @@ class CarService {
     return data;
   }
 
-  async create(username, rawData) {
-    let user = await usersService.getByName(username);
-    rawData.creator = user._id;
+  async create(rawData) {
     let data = await _repository.create(rawData);
     return data;
   }
